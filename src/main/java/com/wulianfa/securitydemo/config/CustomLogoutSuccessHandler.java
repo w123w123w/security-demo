@@ -2,6 +2,7 @@ package com.wulianfa.securitydemo.config;
 
 import com.alibaba.fastjson.JSON;
 import com.wulianfa.securitydemo.bean.WebResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -15,15 +16,18 @@ import java.nio.charset.StandardCharsets;
 /**
  * 退出成功处理器
  */
+@Slf4j
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        WebResponse httpServletResponse = WebResponse.success("退出成功!");
+        log.info("===>exit the success！");
+
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
-        response.getWriter().write(JSON.toJSONString(httpServletResponse));
+        //JSON方式告知退出成功
+        response.getWriter().write(JSON.toJSONString(WebResponse.success("退出成功!")));
     }
 
 }
