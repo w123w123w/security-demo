@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userService;
@@ -29,11 +29,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and()
                 .logout().logoutUrl("/logout")
-                         .logoutSuccessHandler(new CustomLogoutSuccessHandler())
-                         .clearAuthentication(true).permitAll()
+                .logoutSuccessHandler(new CustomLogoutSuccessHandler())
+                .clearAuthentication(true).permitAll()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-                                    .accessDeniedHandler(new CustomAccessDeniedHandler())
+                .accessDeniedHandler(new CustomAccessDeniedHandler())
                 .and()
                 .csrf().disable();
 

@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.StreamUtils;
@@ -51,7 +52,7 @@ public class CustomJSONLoginFilter extends AbstractAuthenticationProcessingFilte
     /**
      * 获取请求体
      */
-    private JSONObject getRequestBody(HttpServletRequest request) throws AuthenticationException{
+    private JSONObject getRequestBody(HttpServletRequest request) throws AuthenticationException {
         try {
             StringBuilder stringBuilder = new StringBuilder();
             InputStream inputStream = request.getInputStream();
@@ -62,9 +63,9 @@ public class CustomJSONLoginFilter extends AbstractAuthenticationProcessingFilte
             }
             return JSON.parseObject(stringBuilder.toString());
         } catch (IOException e) {
-            log.error("get request body error.");
+            log.error("get request body error!");
         }
-        throw new AuthenticationServiceException("invalid request body");
+        throw new AuthenticationServiceException("invalid request body!");
     }
 
     /**
@@ -72,11 +73,13 @@ public class CustomJSONLoginFilter extends AbstractAuthenticationProcessingFilte
      */
     private void validateUsernameAndPassword(String username, String password) throws AuthenticationException {
         UserDO userDO = userService.getByUsername(username);
-        if (userDO == null){
-            throw new UsernameNotFoundException("user not exist");
+        if (userDO == null) {
+            throw new UsernameNotFoundException("user not exist!");
         }
-        if(!userDO.getPassword().equals(password)){
-            throw new AuthenticationServiceException("error username or password");
+        //将未经过加密的密码和db加密的密码传进去进行判断
+        boolean matches = new BCryptPasswordEncoder().matches(password, userDO.getPassword());
+        if (!matches) {
+            throw new AuthenticationServiceException("error username or password!");
         }
     }
 
