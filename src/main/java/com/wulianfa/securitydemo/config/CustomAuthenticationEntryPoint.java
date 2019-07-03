@@ -21,18 +21,18 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        log.info("===>not logged in！");
+        log.info("===>not logged in!");
 
         httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         httpServletResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
         httpServletResponse.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         //方式一：返回JSON数据告知未登录
-        //WebResponse response = new WebResponse();
-        //response.setCode(String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
-        //response.setMessage("authenticate fail!");
-        //httpServletResponse.getWriter().write(JSON.toJSONString(response));
+        WebResponse response = new WebResponse();
+        response.setCode(String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
+        response.setMessage("not logged in!");
+        httpServletResponse.getWriter().write(JSON.toJSONString(response));
         //方式二：重定向登录页
-        httpServletResponse.sendRedirect("/login");
+        //httpServletResponse.sendRedirect("/login");
     }
 
 }

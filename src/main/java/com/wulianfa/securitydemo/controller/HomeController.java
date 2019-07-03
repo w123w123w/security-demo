@@ -5,23 +5,24 @@ import com.wulianfa.securitydemo.entity.UserDO;
 import com.wulianfa.securitydemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class HomeController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping("/index")
+    @ResponseBody
     public String main(){
         return "这是首页";
     }
 
     @PostMapping("/register")
+    @ResponseBody
     public WebResponse doRegister(@RequestBody UserDO userDO){
         String encode = new BCryptPasswordEncoder().encode(userDO.getPassword());
         userDO.setPassword(encode);
@@ -29,9 +30,9 @@ public class HomeController {
         return WebResponse.success("注册成功");
     }
 
-    @GetMapping("/login")
-    public String doLogin(){
-        return "这是登录页";
+    @RequestMapping("/loginPage")
+    public ModelAndView doLogin(){
+        return new ModelAndView("login");
     }
 
 }
