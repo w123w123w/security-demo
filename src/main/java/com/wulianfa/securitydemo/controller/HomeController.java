@@ -20,6 +20,11 @@ public class HomeController {
         return "这是首页";
     }
 
+    @RequestMapping("/loginPage")
+    public String doLogin(){
+        return "loginPage";
+    }
+
     @PostMapping("/register")
     @ResponseBody
     public WebResponse doRegister(@RequestBody UserDO userDO){
@@ -27,13 +32,6 @@ public class HomeController {
         userDO.setPassword(encode);
         userService.insert(userDO);
         return WebResponse.success("注册成功");
-    }
-
-    @RequestMapping("/loginPage")
-    public String doLogin(){
-        String i = "123";
-        System.out.println(i);
-        return "login";
     }
 
 }

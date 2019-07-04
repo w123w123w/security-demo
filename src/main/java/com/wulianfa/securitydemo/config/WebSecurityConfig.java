@@ -3,6 +3,7 @@ package com.wulianfa.securitydemo.config;
 import com.wulianfa.securitydemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -48,5 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         customJSONLoginFilter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler());
         return customJSONLoginFilter;
     }
+
+    /*@Override
+    public void configure(WebSecurity web) throws Exception {
+        //关闭spring security
+        web.ignoring().antMatchers("/**");
+    }*/
 
 }
