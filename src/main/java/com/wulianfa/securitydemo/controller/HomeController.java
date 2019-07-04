@@ -15,7 +15,7 @@ public class HomeController {
     private UserService userService;
 
     @RequestMapping("/index")
-    public String main(){
+    public String index(){
         return "index";
     }
 

@@ -46,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 自定义认证过滤器
      */
     private CustomJSONLoginFilter customJSONLoginFilter() {
-        log.info("自定义认证过滤器");
         CustomJSONLoginFilter customJSONLoginFilter = new CustomJSONLoginFilter("/login", userService);
         customJSONLoginFilter.setAuthenticationFailureHandler(new CustomAuthenticationFailureHandler());
         customJSONLoginFilter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler());

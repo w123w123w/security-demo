@@ -7,6 +7,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
+  freemarker:
+    suffix: .html
+    template-loader-path: classpath:/templates/
   jpa:
     hibernate:
       ddl-auto: update
