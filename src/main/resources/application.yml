@@ -12,6 +12,3 @@ spring:
       ddl-auto: update
     open-in-view: false
     database-platform: org.hibernate.dialect.MySQL5Dialect
-  freemarker:
-    suffix: .ftl
-    template-loader-path: classpath:/templates/

@@ -1,6 +1,7 @@
 package com.wulianfa.securitydemo.config;
 
 import com.wulianfa.securitydemo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
+@Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -44,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 自定义认证过滤器
      */
     private CustomJSONLoginFilter customJSONLoginFilter() {
+        log.info("自定义认证过滤器");
         CustomJSONLoginFilter customJSONLoginFilter = new CustomJSONLoginFilter("/login", userService);
         customJSONLoginFilter.setAuthenticationFailureHandler(new CustomAuthenticationFailureHandler());
         customJSONLoginFilter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler());

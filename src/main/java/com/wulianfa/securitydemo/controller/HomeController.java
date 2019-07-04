@@ -14,15 +14,9 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/index")
-    @ResponseBody
+    @RequestMapping("/index")
     public String main(){
-        return "这是首页";
-    }
-
-    @RequestMapping("/loginPage")
-    public String doLogin(){
-        return "loginPage";
+        return "index";
     }
 
     @PostMapping("/register")
