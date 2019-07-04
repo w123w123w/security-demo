@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -31,8 +30,10 @@ public class HomeController {
     }
 
     @RequestMapping("/loginPage")
-    public ModelAndView doLogin(){
-        return new ModelAndView("login");
+    public String doLogin(){
+        String i = "123";
+        System.out.println(i);
+        return "login";
     }
 
 }

@@ -24,11 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //.antMatchers("/registerPage", "/register", "/loginPage", "/login").permitAll()
                 .antMatchers("/user/**").hasAuthority("USER")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                /*.and()
-                .authorizeRequests().anyRequest().authenticated()*/
                 .and()
                 .logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(new CustomLogoutSuccessHandler())
